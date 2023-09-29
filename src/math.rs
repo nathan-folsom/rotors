@@ -6,7 +6,7 @@ pub fn init_cells() -> Vec<(f64, f64)> {
     for row in 0..GRID_SIZE {
         for col in 0..GRID_SIZE {
             let step_1 = Box::new(move |x: f64, y: f64| {
-                let mut transform = |n: f64| {
+                let transform = |n: f64| {
                     let sin = n.sin();
                     let adjusted = (sin + 1.0) * 0.5;
                     adjusted
@@ -80,16 +80,17 @@ pub fn get_influence_cell(x: &f64, y: &f64) -> usize {
 
 pub fn get_next_particle(x: &f64, y: &f64, cell: &(f64, f64)) -> (f64, f64) {
     // Wrap around if they go offscreen
-    // let next_x = (x + (cell.1 * CELL_INFLUENCE)) % WINDOW_WIDTH;
-    // let next_y = (y + (cell.0 * CELL_INFLUENCE)) % WINDOW_HEIGHT;
+    // Swapping x for y can produce some interesting effects
+    let next_x = (x + (cell.0 * CELL_INFLUENCE)) % WINDOW_WIDTH;
+    let next_y = (y + (cell.1 * CELL_INFLUENCE)) % WINDOW_HEIGHT;
 
     // Randomly respawn if they go offscreen
-    let next_x = x + (cell.0 * CELL_INFLUENCE);
-    let next_y = y + (cell.1 * CELL_INFLUENCE);
-
-    if next_x <= 0.0 || next_x >= WINDOW_WIDTH || next_y <= 0.0 || next_y >= WINDOW_HEIGHT {
-        return get_random_particle();
-    }
+    // let next_x = x + (cell.0 * CELL_INFLUENCE);
+    // let next_y = y + (cell.1 * CELL_INFLUENCE);
+    //
+    // if next_x <= 0.0 || next_x >= WINDOW_WIDTH || next_y <= 0.0 || next_y >= WINDOW_HEIGHT {
+    //     return get_random_particle();
+    // }
 
     (next_x, next_y)
 }

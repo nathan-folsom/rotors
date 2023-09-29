@@ -54,7 +54,7 @@ impl FieldRenderer {
     }
 
     fn render_particles(&mut self, ctx: &CanvasRenderingContext2d) {
-        ctx.set_stroke_style(&JsValue::from_str("#ff00000f"));
+        ctx.set_stroke_style(&JsValue::from_str("#ff000003"));
         self.particles = self
             .particles
             .iter()
@@ -77,6 +77,8 @@ impl FieldRenderer {
             })
             .collect();
 
-        ctx.set_stroke_style(&JsValue::from_str("#000000"));
+        // Fade out particle paths
+        // ctx.set_fill_style(&JsValue::from_str("#ffffff03"));
+        // ctx.fill_rect(0.0, 0.0, WINDOW_WIDTH, WINDOW_HEIGHT);
     }
 }

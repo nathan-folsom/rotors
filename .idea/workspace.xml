@@ -7,9 +7,8 @@
     <cargoProject FILE="$PROJECT_DIR$/Cargo.toml" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a93ed3a1-204d-4332-a192-464e32aa119a" name="Changes" comment="it's alive">
+    <list default="true" id="a93ed3a1-204d-4332-a192-464e32aa119a" name="Changes" comment="some more interesting shapes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/math.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/math.rs" afterDir="false" />
     </list>
@@ -71,7 +70,7 @@
       <option name="presentableId" value="Default" />
       <updated>1695792010156</updated>
       <workItem from="1695792011257" duration="1965000" />
-      <workItem from="1695793988223" duration="22222000" />
+      <workItem from="1695793988223" duration="23083000" />
     </task>
     <task id="LOCAL-00001" summary="it's alive">
       <option name="closed" value="true" />
@@ -81,7 +80,15 @@
       <option name="project" value="LOCAL" />
       <updated>1695967017978</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="some more interesting shapes">
+      <option name="closed" value="true" />
+      <created>1695972569305</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1695972569305</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -101,7 +108,8 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="it's alive" />
-    <option name="LAST_COMMIT_MESSAGE" value="it's alive" />
+    <MESSAGE value="some more interesting shapes" />
+    <option name="LAST_COMMIT_MESSAGE" value="some more interesting shapes" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
