@@ -1,4 +1,4 @@
-pub const GRID_SIZE: usize = 300;
+pub const GRID_SIZE: usize = 200;
 pub const CELL_COUNT: usize = GRID_SIZE.pow(2);
 pub const CELL_WIDTH: f64 = WINDOW_WIDTH / GRID_SIZE as f64;
 pub const WINDOW_WIDTH: f64 = 1000.0;

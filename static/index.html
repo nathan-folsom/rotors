@@ -8,11 +8,19 @@
             border: 2px black solid;
             border-radius: 3px;
         }
+        #controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
     </style>
 </head>
 <body>
 <canvas id="art"></canvas>
-<div id="frame-counter"></div>
+<div id="controls">
+    <div id="frame-counter"></div>
+    <button id="pause-play">Pause</button>
+</div>
 <script src="index.js"></script>
 </body>
 </html>
