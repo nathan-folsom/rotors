@@ -61,27 +61,25 @@ impl FieldRenderer {
 
     fn render_particles(&mut self, ctx: &CanvasRenderingContext2d) {
         ctx.set_stroke_style(&JsValue::from_str("#ff000003"));
-        self.particles = self
-            .particles
-            .iter()
-            .map(|(x, y)| {
-                ctx.begin_path();
-                let _ = ctx.ellipse(
-                    *x,
-                    *y,
-                    PARTICLE_SIZE / 2.0,
-                    PARTICLE_SIZE / 2.0,
-                    0f64,
-                    0f64,
-                    2f64 * PI,
-                );
-                ctx.stroke();
+        for (x, y) in &mut self.particles {
+            ctx.begin_path();
+            let _ = ctx.ellipse(
+                *x,
+                *y,
+                PARTICLE_SIZE / 2.0,
+                PARTICLE_SIZE / 2.0,
+                0f64,
+                0f64,
+                2f64 * PI,
+            );
+            ctx.stroke();
 
-                let influence_cell_i = get_influence_cell(x, y);
-                let cell = &self.cells[influence_cell_i];
-                get_next_particle(x, y, cell)
-            })
-            .collect();
+            let influence_cell_i = get_influence_cell(x, y);
+            let cell = &self.cells[influence_cell_i];
+            let (next_x, next_y) = get_next_particle(x, y, cell);
+            *x = next_x;
+            *y = next_y;
+        }
 
         // Fade out particle paths
         // ctx.set_fill_style(&JsValue::from_str("#ffffff03"));
