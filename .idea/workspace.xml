@@ -7,10 +7,8 @@
     <cargoProject FILE="$PROJECT_DIR$/Cargo.toml" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a93ed3a1-204d-4332-a192-464e32aa119a" name="Changes" comment="capture image button">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib.rs" afterDir="false" />
+    <list default="true" id="a93ed3a1-204d-4332-a192-464e32aa119a" name="Changes" comment="give canvas a white background initially">
+      <change beforePath="$PROJECT_DIR$/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/static/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +69,7 @@
       <updated>1695792010156</updated>
       <workItem from="1695792011257" duration="1965000" />
       <workItem from="1695793988223" duration="24075000" />
-      <workItem from="1696399198922" duration="1948000" />
+      <workItem from="1696399198922" duration="2030000" />
     </task>
     <task id="LOCAL-00001" summary="it's alive">
       <option name="closed" value="true" />
@@ -121,7 +119,15 @@
       <option name="project" value="LOCAL" />
       <updated>1696401121972</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="give canvas a white background initially">
+      <option name="closed" value="true" />
+      <created>1696401265803</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1696401265803</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -145,7 +151,8 @@
     <MESSAGE value="small adjustments" />
     <MESSAGE value="pause/play button" />
     <MESSAGE value="capture image button" />
-    <option name="LAST_COMMIT_MESSAGE" value="capture image button" />
+    <MESSAGE value="give canvas a white background initially" />
+    <option name="LAST_COMMIT_MESSAGE" value="give canvas a white background initially" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
