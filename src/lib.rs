@@ -53,14 +53,12 @@ impl FieldRenderer {
     #[wasm_bindgen]
     pub fn render_frame(&mut self, ctx: &CanvasRenderingContext2d) -> i32 {
         self.frame_count += 1;
-
         self.render_particles(ctx);
-
         self.frame_count
     }
 
     fn render_particles(&mut self, ctx: &CanvasRenderingContext2d) {
-        ctx.set_stroke_style(&JsValue::from_str("#ff000003"));
+        ctx.set_stroke_style(&JsValue::from_str("#ff0000"));
         for (x, y) in &mut self.particles {
             ctx.begin_path();
             let _ = ctx.ellipse(
@@ -82,7 +80,7 @@ impl FieldRenderer {
         }
 
         // Fade out particle paths
-        // ctx.set_fill_style(&JsValue::from_str("#ffffff03"));
-        // ctx.fill_rect(0.0, 0.0, WINDOW_WIDTH, WINDOW_HEIGHT);
+        ctx.set_fill_style(&JsValue::from_str("#ffffff0f"));
+        ctx.fill_rect(0.0, 0.0, WINDOW_WIDTH, WINDOW_HEIGHT);
     }
 }

@@ -79,6 +79,10 @@ pub fn get_influence_cell(x: &f64, y: &f64) -> usize {
 }
 
 pub fn get_next_particle(x: &f64, y: &f64, cell: &(f64, f64)) -> (f64, f64) {
+    // Do nothing
+    // let next_x = (x + (cell.0 * CELL_INFLUENCE)).max(0.0).min(WINDOW_WIDTH);
+    // let next_y = (y + (cell.1 * CELL_INFLUENCE)).max(0.0).min(WINDOW_HEIGHT);
+
     // Wrap around if they go offscreen
     // Swapping x for y can produce some interesting effects
     let next_x = (x + (cell.0 * CELL_INFLUENCE)) % WINDOW_WIDTH;
