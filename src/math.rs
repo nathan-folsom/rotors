@@ -1,5 +1,52 @@
 use crate::constants::*;
 use rand::{thread_rng, Rng};
+use wasm_bindgen::JsValue;
+
+pub struct Particle {
+    pub x: f64,
+    pub y: f64,
+    pub color: JsValue,
+}
+
+impl Default for Particle {
+    fn default() -> Self {
+        let mut rng = thread_rng();
+        let color_choice = rng.gen_range(0..=2);
+        let color: JsValue;
+        if color_choice == 0 {
+            color = JsValue::from("#ef00000f");
+        } else {
+            color = JsValue::from("#ffffff03");
+        }
+
+        Self {
+            x: rng.gen_range(0f64..=WINDOW_WIDTH),
+            y: rng.gen_range(0f64..=WINDOW_HEIGHT),
+            color,
+        }
+    }
+}
+
+impl Particle {
+    pub fn get_next(&mut self, cell: &(f64, f64)) {
+        // Do nothing
+        // let next_x = (x + (cell.0 * CELL_INFLUENCE)).max(0.0).min(WINDOW_WIDTH);
+        // let next_y = (y + (cell.1 * CELL_INFLUENCE)).max(0.0).min(WINDOW_HEIGHT);
+
+        // Wrap around if they go offscreen
+        // Swapping x for y can produce some interesting effects
+        self.x = (self.x + (cell.0 * CELL_INFLUENCE)) % WINDOW_WIDTH;
+        self.y = (self.y + (cell.1 * CELL_INFLUENCE)) % WINDOW_HEIGHT;
+
+        // Randomly respawn if they go offscreen
+        // let next_x = x + (cell.0 * CELL_INFLUENCE);
+        // let next_y = y + (cell.1 * CELL_INFLUENCE);
+        //
+        // if next_x <= 0.0 || next_x >= WINDOW_WIDTH || next_y <= 0.0 || next_y >= WINDOW_HEIGHT {
+        //     return get_random_particle();
+        // }
+    }
+}
 
 pub fn init_cells() -> Vec<(f64, f64)> {
     let mut cells = vec![];
@@ -33,10 +80,10 @@ pub fn init_cells() -> Vec<(f64, f64)> {
     cells
 }
 
-pub fn init_particles() -> Vec<(f64, f64)> {
+pub fn init_particles() -> Vec<Particle> {
     let mut particles = vec![];
     for _ in 0..PARTICLE_COUNT {
-        particles.push(get_random_particle())
+        particles.push(Particle::default())
     }
     particles
 }

@@ -26,10 +26,9 @@ pub fn main_js() -> Result<(), JsValue> {
 }
 
 #[wasm_bindgen]
-#[derive(Default)]
 pub struct FieldRenderer {
     cells: Vec<(f64, f64)>,
-    particles: Vec<(f64, f64)>,
+    particles: Vec<Particle>,
     frame_count: i32,
 }
 
@@ -46,7 +45,7 @@ impl FieldRenderer {
 
     #[wasm_bindgen]
     pub fn init(&self, ctx: &CanvasRenderingContext2d) {
-        ctx.set_fill_style(&JsValue::from_str("#ffffff"));
+        ctx.set_fill_style(&JsValue::from_str("#03000f"));
         ctx.fill_rect(0.0, 0.0, WINDOW_WIDTH, WINDOW_HEIGHT);
     }
 
@@ -58,8 +57,9 @@ impl FieldRenderer {
     }
 
     fn render_particles(&mut self, ctx: &CanvasRenderingContext2d) {
-        ctx.set_stroke_style(&JsValue::from_str("#ff0000"));
-        for (x, y) in &mut self.particles {
+        for particle in &mut self.particles {
+            let Particle { x, y, color } = particle;
+            ctx.set_stroke_style(&color);
             ctx.begin_path();
             let _ = ctx.ellipse(
                 *x,
@@ -74,13 +74,12 @@ impl FieldRenderer {
 
             let influence_cell_i = get_influence_cell(x, y);
             let cell = &self.cells[influence_cell_i];
-            let (next_x, next_y) = get_next_particle(x, y, cell);
-            *x = next_x;
-            *y = next_y;
+
+            particle.get_next(cell);
         }
 
         // Fade out particle paths
-        ctx.set_fill_style(&JsValue::from_str("#ffffff0f"));
-        ctx.fill_rect(0.0, 0.0, WINDOW_WIDTH, WINDOW_HEIGHT);
+        // ctx.set_fill_style(&JsValue::from_str("#ffffff03"));
+        // ctx.fill_rect(0.0, 0.0, WINDOW_WIDTH, WINDOW_HEIGHT);
     }
 }
