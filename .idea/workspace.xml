@@ -7,11 +7,9 @@
     <cargoProject FILE="$PROJECT_DIR$/Cargo.toml" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a93ed3a1-204d-4332-a192-464e32aa119a" name="Changes" comment="small adjustments">
+    <list default="true" id="a93ed3a1-204d-4332-a192-464e32aa119a" name="Changes" comment="pause/play button">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/static/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -73,7 +71,7 @@
       <updated>1695792010156</updated>
       <workItem from="1695792011257" duration="1965000" />
       <workItem from="1695793988223" duration="24075000" />
-      <workItem from="1696399198922" duration="506000" />
+      <workItem from="1696399198922" duration="1564000" />
     </task>
     <task id="LOCAL-00001" summary="it's alive">
       <option name="closed" value="true" />
@@ -99,7 +97,15 @@
       <option name="project" value="LOCAL" />
       <updated>1695973798917</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="pause/play button">
+      <option name="closed" value="true" />
+      <created>1696399774430</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1696399774430</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -121,7 +127,8 @@
     <MESSAGE value="it's alive" />
     <MESSAGE value="some more interesting shapes" />
     <MESSAGE value="small adjustments" />
-    <option name="LAST_COMMIT_MESSAGE" value="small adjustments" />
+    <MESSAGE value="pause/play button" />
+    <option name="LAST_COMMIT_MESSAGE" value="pause/play button" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

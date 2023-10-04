@@ -7,12 +7,21 @@ import("../pkg/index.js").then(mod => {
     const renderer = new mod.FieldRenderer();
 
     const frameCounter = document.getElementById("frame-counter");
+    const frameRate = document.getElementById("frame-rate");
 
     let playing = true;
+    let lastTimestamp = performance.now();
 
     let draw = () => {
         let frameCount = renderer.render_frame(ctx);
-        frameCounter.innerText = `Frame count: ${frameCount}`;
+        frameCounter.innerText = `Frames: ${frameCount}`;
+
+        if (frameCount % 10 === 0) {
+            const fps = 10 / ((performance.now() - lastTimestamp) / 1000);
+            frameRate.innerText = `fps: ${fps.toFixed(2)}`
+            lastTimestamp = performance.now();
+        }
+
         if (!playing) return;
         requestAnimationFrame(draw)
     }
@@ -28,6 +37,16 @@ import("../pkg/index.js").then(mod => {
             playButton.innerText = "Pause";
             draw();
         }
+    }
+
+    const captureButton = document.getElementById("capture");
+    captureButton.addEventListener("click", handleCaptureImage);
+    function handleCaptureImage() {
+        const imageUrl = canvas.toDataURL();
+        const link = document.createElement("a");
+        link.download = "flow";
+        link.href = imageUrl;
+        link.click();
     }
 
     draw();
