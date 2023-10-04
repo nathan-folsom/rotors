@@ -45,6 +45,12 @@ impl FieldRenderer {
     }
 
     #[wasm_bindgen]
+    pub fn init(&self, ctx: &CanvasRenderingContext2d) {
+        ctx.set_fill_style(&JsValue::from_str("#ffffff"));
+        ctx.fill_rect(0.0, 0.0, WINDOW_WIDTH, WINDOW_HEIGHT);
+    }
+
+    #[wasm_bindgen]
     pub fn render_frame(&mut self, ctx: &CanvasRenderingContext2d) -> i32 {
         self.frame_count += 1;
 

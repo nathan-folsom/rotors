@@ -5,6 +5,7 @@ import("../pkg/index.js").then(mod => {
     const ctx = canvas.getContext("2d");
 
     const renderer = new mod.FieldRenderer();
+    renderer.init(ctx);
 
     const frameCounter = document.getElementById("frame-counter");
     const frameRate = document.getElementById("frame-rate");
