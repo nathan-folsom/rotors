@@ -28,6 +28,7 @@ pub fn main_js() -> Result<(), JsValue> {
 #[wasm_bindgen]
 pub struct FieldRenderer {
     cells: Vec<(f64, f64)>,
+    rotors: (Rotor, Rotor),
     particles: Vec<Particle>,
     frame_count: i32,
 }
@@ -39,47 +40,51 @@ impl FieldRenderer {
         Self {
             cells: init_cells(),
             particles: init_particles(),
+            rotors: init_rotors(),
             frame_count: 0,
         }
     }
 
     #[wasm_bindgen]
     pub fn init(&self, ctx: &CanvasRenderingContext2d) {
-        ctx.set_fill_style(&JsValue::from_str("#03000f"));
-        ctx.fill_rect(0.0, 0.0, WINDOW_WIDTH, WINDOW_HEIGHT);
+        self.render_background(ctx);
     }
 
     #[wasm_bindgen]
     pub fn render_frame(&mut self, ctx: &CanvasRenderingContext2d) -> i32 {
         self.frame_count += 1;
-        self.render_particles(ctx);
+        self.render_background(ctx);
+        self.render_rotors(ctx);
         self.frame_count
     }
 
-    fn render_particles(&mut self, ctx: &CanvasRenderingContext2d) {
-        for particle in &mut self.particles {
-            let Particle { x, y, color } = particle;
-            ctx.set_stroke_style(&color);
+    fn render_background(&self, ctx: &CanvasRenderingContext2d) {
+        ctx.set_fill_style(&JsValue::from_str("#03000f"));
+        ctx.fill_rect(0.0, 0.0, WINDOW_WIDTH, WINDOW_HEIGHT);
+        ctx.set_stroke_style(&JsValue::from("#ffffff"));
+
+        let render_rim = |rotor: &Rotor| {
             ctx.begin_path();
-            let _ = ctx.ellipse(
-                *x,
-                *y,
-                PARTICLE_SIZE / 2.0,
-                PARTICLE_SIZE / 2.0,
-                0f64,
-                0f64,
-                2f64 * PI,
-            );
+            let _ = ctx.ellipse(rotor.cx, rotor.cy, rotor.r, rotor.r, 0.0, 0.0, 2.0 * PI);
             ctx.stroke();
+        };
 
-            let influence_cell_i = get_influence_cell(x, y);
-            let cell = &self.cells[influence_cell_i];
+        render_rim(&self.rotors.0);
+        render_rim(&self.rotors.1);
+    }
 
-            particle.get_next(cell);
-        }
-
-        // Fade out particle paths
-        // ctx.set_fill_style(&JsValue::from_str("#ffffff03"));
-        // ctx.fill_rect(0.0, 0.0, WINDOW_WIDTH, WINDOW_HEIGHT);
+    fn render_rotors(&mut self, ctx: &CanvasRenderingContext2d) {
+        ctx.set_stroke_style(&JsValue::from_str("#ff0000"));
+        let points = (self.rotors.0.get_point(), self.rotors.1.get_point());
+        let render_point = |point: (f64, f64)| {
+            let (x, y) = point;
+            ctx.begin_path();
+            let _ = ctx.ellipse(x, y, 2.0, 2.0, 0.0, 0.0, 2.0 * PI);
+            ctx.stroke();
+        };
+        self.rotors.0.advance();
+        self.rotors.1.advance();
+        render_point(points.0);
+        render_point(points.1);
     }
 }

@@ -1,5 +1,6 @@
 use crate::constants::*;
 use rand::{thread_rng, Rng};
+use std::f64::consts::PI;
 use wasm_bindgen::JsValue;
 
 pub struct Particle {
@@ -144,4 +145,55 @@ pub fn get_next_particle(x: &f64, y: &f64, cell: &(f64, f64)) -> (f64, f64) {
     // }
 
     (next_x, next_y)
+}
+
+pub struct Rotor {
+    pub cx: f64,
+    pub cy: f64,
+    pub r: f64,
+    theta: f64,
+    v: f64,
+    l: f64,
+}
+
+impl Rotor {
+    pub fn get_point(&self) -> (f64, f64) {
+        // sin(theta) = dy / r
+        let dy = self.theta.sin() * self.r;
+        // y = cy + dy
+        let y = self.cy + dy;
+
+        // cos(theta) = dx / r
+        let dx = self.theta.cos() * self.r;
+        // x = cx + dx
+        let x = self.cx + dx;
+
+        (x, y)
+    }
+
+    pub fn advance(&mut self) {
+        self.theta += self.v;
+    }
+}
+
+pub fn init_rotors() -> (Rotor, Rotor) {
+    let a = Rotor {
+        cx: 100.0,
+        cy: 200.0,
+        r: 50.0,
+        theta: 0.0,
+        v: 0.02,
+        l: 200.0,
+    };
+
+    let b = Rotor {
+        cx: 300.0,
+        cy: 100.0,
+        r: 90.0,
+        theta: 0.0,
+        v: 0.03,
+        l: 150.0,
+    };
+
+    (a, b)
 }
