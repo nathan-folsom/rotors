@@ -4,8 +4,8 @@ use std::f64::consts::PI;
 use wasm_bindgen::prelude::*;
 use web_sys::CanvasRenderingContext2d;
 
-pub mod constants;
-pub mod math;
+mod constants;
+mod math;
 
 // When the `wee_alloc` feature is enabled, this uses `wee_alloc` as the global
 // allocator.
@@ -86,5 +86,13 @@ impl FieldRenderer {
         self.rotors.1.advance();
         render_point(points.0);
         render_point(points.1);
+
+        let intersections = get_intersection(&self.rotors.0, &self.rotors.1);
+
+        ctx.begin_path();
+        ctx.move_to(points.0 .0, points.0 .1);
+        ctx.line_to(intersections.1 .0, intersections.1 .1);
+        ctx.line_to(points.1 .0, points.1 .1);
+        ctx.stroke();
     }
 }

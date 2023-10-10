@@ -197,3 +197,32 @@ pub fn init_rotors() -> (Rotor, Rotor) {
 
     (a, b)
 }
+
+pub fn get_intersection(a: &Rotor, b: &Rotor) -> ((f64, f64), (f64, f64)) {
+    let r1 = a.l;
+    let r2 = b.l;
+
+    let (x1, y1) = a.get_point();
+
+    let (x2, y2) = b.get_point();
+
+    let cdx = x1 - x2;
+    let cdy = y1 - y2;
+
+    let dist = (cdx * cdx + cdy * cdy).sqrt();
+
+    let dist2 = dist * dist;
+    let dist4 = dist2 * dist2;
+
+    let a = (r1 * r1 - r2 * r2) / (2.0 * dist2);
+    let r1r2 = r1 * r1 - r2 * r2;
+    let c = (2.0 * (r1 * r1 + r2 * r2) / dist2 - (r1r2 * r1r2) / dist4 - 1.0).sqrt();
+
+    let fx = (x1 + x2) / 2.0 + a * (x2 - x1);
+    let gx = c * (y2 - y1) / 2.0;
+
+    let fy = (y1 + y2) / 2.0 + a * (y2 - y1);
+    let gy = c * (x1 - x2) / 2.0;
+
+    ((fx + gx, fy + gy), (fx - gx, fy - gy))
+}

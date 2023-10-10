@@ -7,9 +7,9 @@
     <cargoProject FILE="$PROJECT_DIR$/Cargo.toml" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a93ed3a1-204d-4332-a192-464e32aa119a" name="Changes" comment="tweak some stuff">
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/rotors.iml" afterDir="false" />
+    <list default="true" id="a93ed3a1-204d-4332-a192-464e32aa119a" name="Changes" comment="spinning rotors!">
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/rotors.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/math.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/math.rs" afterDir="false" />
@@ -20,11 +20,6 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="master" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MacroExpansionManager">
@@ -44,21 +39,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "multicolor",
-    "last_opened_file_path": "/Users/n8folsom/code/rotors",
-    "nodejs_package_manager_path": "npm",
-    "org.rust.cargo.project.model.PROJECT_DISCOVERY": "true",
-    "settings.editor.selected.configurable": "vcs.Git"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/n8folsom/code/vectart&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;org.rust.cargo.project.model.PROJECT_DISCOVERY&quot;: &quot;true&quot;,
+    &quot;org.rust.disableDetachedFileInspection/Users/n8folsom/code/rotors/src/lib.rs&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Git&quot;
   }
-}]]></component>
+}</component>
   <component name="RsExternalLinterProjectSettings">
     <option name="runOnTheFly" value="true" />
     <option name="tool" value="Clippy" />
@@ -80,8 +74,9 @@
       <updated>1695792010156</updated>
       <workItem from="1695792011257" duration="1965000" />
       <workItem from="1695793988223" duration="24075000" />
-      <workItem from="1696399198922" duration="5139000" />
-      <workItem from="1696910641240" duration="3328000" />
+      <workItem from="1696399198922" duration="3263000" />
+      <workItem from="1696914423142" duration="204000" />
+      <workItem from="1696914637178" duration="2397000" />
     </task>
     <task id="LOCAL-00001" summary="it's alive">
       <option name="closed" value="true" />
@@ -155,15 +150,7 @@
       <option name="project" value="LOCAL" />
       <updated>1696401606531</updated>
     </task>
-    <task id="LOCAL-00010" summary="tweak some stuff">
-      <option name="closed" value="true" />
-      <created>1696402590414</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1696402590414</updated>
-    </task>
-    <option name="localTasksCounter" value="11" />
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -174,19 +161,7 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="master" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
       </map>
@@ -202,8 +177,7 @@
     <MESSAGE value="give canvas a white background initially" />
     <MESSAGE value="background color" />
     <MESSAGE value="cleanup particle iteration code" />
-    <MESSAGE value="tweak some stuff" />
-    <option name="LAST_COMMIT_MESSAGE" value="tweak some stuff" />
+    <option name="LAST_COMMIT_MESSAGE" value="cleanup particle iteration code" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
