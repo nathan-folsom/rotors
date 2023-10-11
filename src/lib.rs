@@ -27,10 +27,9 @@ pub fn main_js() -> Result<(), JsValue> {
 
 #[wasm_bindgen]
 pub struct FieldRenderer {
-    cells: Vec<(f64, f64)>,
     rotors: (Rotor, Rotor),
-    particles: Vec<Particle>,
     frame_count: i32,
+    prev_point: Option<(f64, f64)>,
 }
 
 #[wasm_bindgen]
@@ -38,10 +37,9 @@ impl FieldRenderer {
     #[wasm_bindgen(constructor)]
     pub fn new() -> Self {
         Self {
-            cells: init_cells(),
-            particles: init_particles(),
             rotors: init_rotors(),
             frame_count: 0,
+            prev_point: None,
         }
     }
 
@@ -53,7 +51,7 @@ impl FieldRenderer {
     #[wasm_bindgen]
     pub fn render_frame(&mut self, ctx: &CanvasRenderingContext2d) -> i32 {
         self.frame_count += 1;
-        self.render_background(ctx);
+        // self.render_background(ctx);
         self.render_rotors(ctx);
         self.frame_count
     }
@@ -69,8 +67,8 @@ impl FieldRenderer {
             ctx.stroke();
         };
 
-        render_rim(&self.rotors.0);
-        render_rim(&self.rotors.1);
+        // render_rim(&self.rotors.0);
+        // render_rim(&self.rotors.1);
     }
 
     fn render_rotors(&mut self, ctx: &CanvasRenderingContext2d) {
@@ -84,15 +82,18 @@ impl FieldRenderer {
         };
         self.rotors.0.advance();
         self.rotors.1.advance();
-        render_point(points.0);
-        render_point(points.1);
+        // render_point(points.0);
+        // render_point(points.1);
 
         let intersections = get_intersection(&self.rotors.0, &self.rotors.1);
 
-        ctx.begin_path();
-        ctx.move_to(points.0 .0, points.0 .1);
-        ctx.line_to(intersections.1 .0, intersections.1 .1);
-        ctx.line_to(points.1 .0, points.1 .1);
-        ctx.stroke();
+        if let Some((x, y)) = self.prev_point {
+            ctx.begin_path();
+            ctx.move_to(x, y);
+            ctx.line_to(intersections.1 .0, intersections.1 .1);
+            ctx.stroke();
+        }
+
+        self.prev_point = Some((intersections.1 .0, intersections.1 .1));
     }
 }
