@@ -15,7 +15,7 @@ import("../pkg/index.js").then(mod => {
     const frameCounter = document.getElementById("frame-counter");
     const frameRate = document.getElementById("frame-rate");
 
-    let playing = false;
+    let playing = true;
     let lastTimestamp = performance.now();
 
     let draw = () => {
@@ -59,12 +59,12 @@ import("../pkg/index.js").then(mod => {
 
     const overlayButton = document.getElementById("overlay-show-hide");
     overlayButton.addEventListener("click", handleOverlay);
-    let showOverlay = false;
-    overlay.style.display = "none";
+    let showOverlay = true;
+    // overlay.style.display = "none";
     function handleOverlay() {
         showOverlay = !showOverlay;
         overlay.style.display = showOverlay ? "block" : "none";
     }
 
-    // draw();
+    draw();
 }).catch(console.error);
