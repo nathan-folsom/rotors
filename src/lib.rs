@@ -62,12 +62,13 @@ impl FieldRenderer {
     #[wasm_bindgen]
     pub fn render_overlay(&self, ctx: &CanvasRenderingContext2d) {
         ctx.clear_rect(0.0, 0.0, WINDOW_WIDTH, WINDOW_HEIGHT);
+
         ctx.set_stroke_style(&JsValue::from_str("#ff000055"));
         ctx.set_fill_style(&JsValue::from_str("#000000"));
-
         let render_rim = |rotor: &Rotor| {
             ctx.begin_path();
-            let _ = ctx.ellipse(rotor.cx, rotor.cy, rotor.r, rotor.r, 0.0, 0.0, 2.0 * PI);
+            let (cx, cy) = rotor.get_center();
+            let _ = ctx.ellipse(cx, cy, rotor.r, rotor.r, 0.0, 0.0, 2.0 * PI);
             ctx.stroke();
         };
         render_rim(&self.rotors.0);
@@ -123,7 +124,7 @@ impl FieldRenderer {
     }
 
     fn render_line(&mut self, ctx: &CanvasRenderingContext2d) {
-        ctx.set_stroke_style(&JsValue::from_str("#ffffff"));
+        ctx.set_stroke_style(&JsValue::from_str("#ffffff3f"));
         let (x, y) = self.points.pop_front().unwrap();
         ctx.begin_path();
         ctx.move_to(x, y);

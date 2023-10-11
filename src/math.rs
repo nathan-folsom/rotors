@@ -1,52 +1,65 @@
+use crate::constants::{ORIGIN, SPIN_V};
 use std::f64::consts::PI;
+
 pub struct Rotor {
-    pub cx: f64,
-    pub cy: f64,
     pub r: f64,
     theta: f64,
     v: f64,
     l: f64,
+    c_r: f64,
+    c_theta: f64,
 }
 
 impl Rotor {
     pub fn get_point(&self) -> (f64, f64) {
+        let (cx, cy) = self.get_center();
+        Self::get_rotational_point(self.theta, self.r, cx, cy)
+    }
+
+    pub fn get_center(&self) -> (f64, f64) {
+        Self::get_rotational_point(self.c_theta, self.c_r, ORIGIN.0, ORIGIN.1)
+    }
+
+    fn get_rotational_point(theta: f64, r: f64, cx: f64, cy: f64) -> (f64, f64) {
         // sin(theta) = dy / r
-        let dy = self.theta.sin() * self.r;
+        let dy = theta.sin() * r;
         // y = cy + dy
-        let y = self.cy + dy;
+        let y = cy + dy;
 
         // cos(theta) = dx / r
-        let dx = self.theta.cos() * self.r;
+        let dx = theta.cos() * r;
         // x = cx + dx
-        let x = self.cx + dx;
+        let x = cx + dx;
 
         (x, y)
     }
 
     pub fn advance(&mut self) {
+        // Spin point around the rotor
         self.theta += self.v;
-        // self.cx += self.v * 2.0;
-        // self.cy += self.v * 2.0;
+
+        // Translate rotor around center of canvas
+        self.c_theta += SPIN_V;
     }
 }
 
 pub fn init_rotors() -> (Rotor, Rotor) {
     let a = Rotor {
-        cx: 400.0,
-        cy: 200.0,
-        r: 20.0,
+        r: 40.0,
         theta: 0.0,
-        v: 0.000001,
-        l: 400.0,
+        v: 0.0001004,
+        l: 270.0,
+        c_r: 120.0,
+        c_theta: 0.0,
     };
 
     let b = Rotor {
-        cx: 500.0,
-        cy: 300.0,
-        r: 20.0,
+        r: 40.0,
         theta: PI / 4.0,
-        v: 0.0000011,
-        l: 440.0,
+        v: 0.0001,
+        l: 300.0,
+        c_r: 120.0,
+        c_theta: PI / 3.1,
     };
 
     (a, b)
