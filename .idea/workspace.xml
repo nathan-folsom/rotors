@@ -7,8 +7,9 @@
     <cargoProject FILE="$PROJECT_DIR$/Cargo.toml" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a93ed3a1-204d-4332-a192-464e32aa119a" name="Changes" comment="intersections!">
+    <list default="true" id="a93ed3a1-204d-4332-a192-464e32aa119a" name="Changes" comment="trace a line">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/constants.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/math.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/math.rs" afterDir="false" />
     </list>
@@ -74,7 +75,7 @@
       <workItem from="1695793988223" duration="24075000" />
       <workItem from="1696399198922" duration="3263000" />
       <workItem from="1696914423142" duration="204000" />
-      <workItem from="1696914637178" duration="5169000" />
+      <workItem from="1696914637178" duration="6883000" />
     </task>
     <task id="LOCAL-00001" summary="it's alive">
       <option name="closed" value="true" />
@@ -156,7 +157,15 @@
       <option name="project" value="LOCAL" />
       <updated>1696917962004</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="trace a line">
+      <option name="closed" value="true" />
+      <created>1696996405610</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1696996405610</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -184,7 +193,8 @@
     <MESSAGE value="background color" />
     <MESSAGE value="cleanup particle iteration code" />
     <MESSAGE value="intersections!" />
-    <option name="LAST_COMMIT_MESSAGE" value="intersections!" />
+    <MESSAGE value="trace a line" />
+    <option name="LAST_COMMIT_MESSAGE" value="trace a line" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
