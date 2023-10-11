@@ -59,6 +59,53 @@ impl FieldRenderer {
         self.frame_count
     }
 
+    #[wasm_bindgen]
+    pub fn render_overlay(&self, ctx: &CanvasRenderingContext2d) {
+        ctx.clear_rect(0.0, 0.0, WINDOW_WIDTH, WINDOW_HEIGHT);
+        ctx.set_stroke_style(&JsValue::from_str("#ff000055"));
+        ctx.set_fill_style(&JsValue::from_str("#000000"));
+
+        let render_rim = |rotor: &Rotor| {
+            ctx.begin_path();
+            let _ = ctx.ellipse(rotor.cx, rotor.cy, rotor.r, rotor.r, 0.0, 0.0, 2.0 * PI);
+            ctx.stroke();
+        };
+        render_rim(&self.rotors.0);
+        render_rim(&self.rotors.1);
+
+        ctx.set_stroke_style(&JsValue::from_str("#ff0000"));
+        let points = (self.rotors.0.get_point(), self.rotors.1.get_point());
+        let render_point = |point: (f64, f64)| {
+            let (x, y) = point;
+            ctx.begin_path();
+            let _ = ctx.ellipse(x, y, 2.0, 2.0, 0.0, 0.0, 2.0 * PI);
+            ctx.stroke();
+        };
+        render_point(points.0);
+        render_point(points.1);
+
+        ctx.set_stroke_style(&JsValue::from_str("#ff000055"));
+        let intersections = get_intersection(&self.rotors.0, &self.rotors.1);
+        ctx.begin_path();
+        ctx.move_to(points.0 .0, points.0 .1);
+        ctx.line_to(intersections.1 .0, intersections.1 .1);
+        ctx.line_to(points.1 .0, points.1 .1);
+        ctx.stroke();
+
+        ctx.set_stroke_style(&JsValue::from_str("#ff0000"));
+        ctx.begin_path();
+        let _ = ctx.ellipse(
+            intersections.1 .0,
+            intersections.1 .1,
+            2.0,
+            2.0,
+            0.0,
+            0.0,
+            2.0 * PI,
+        );
+        ctx.stroke();
+    }
+
     fn render_background(&self, ctx: &CanvasRenderingContext2d) {
         ctx.set_fill_style(&JsValue::from_str("#03000f"));
         ctx.fill_rect(0.0, 0.0, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -76,6 +123,7 @@ impl FieldRenderer {
     }
 
     fn render_line(&mut self, ctx: &CanvasRenderingContext2d) {
+        ctx.set_stroke_style(&JsValue::from_str("#ffffff"));
         let (x, y) = self.points.pop_front().unwrap();
         ctx.begin_path();
         ctx.move_to(x, y);

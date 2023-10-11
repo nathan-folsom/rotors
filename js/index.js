@@ -4,6 +4,11 @@ import("../pkg/index.js").then(mod => {
     canvas.height = 700;
     const ctx = canvas.getContext("2d");
 
+    const overlay = document.getElementById("overlay");
+    overlay.width = 700;
+    overlay.height = 700;
+    const overlayCtx = overlay.getContext("2d");
+
     const renderer = new mod.FieldRenderer();
     renderer.init(ctx);
 
@@ -16,6 +21,8 @@ import("../pkg/index.js").then(mod => {
     let draw = () => {
         let frameCount = renderer.render_frame(ctx);
         frameCounter.innerText = `Frames: ${frameCount}`;
+
+        renderer.render_overlay(overlayCtx);
 
         if (frameCount % 10 === 0) {
             const fps = 10 / ((performance.now() - lastTimestamp) / 1000);
@@ -48,6 +55,14 @@ import("../pkg/index.js").then(mod => {
         link.download = "flow";
         link.href = imageUrl;
         link.click();
+    }
+
+    const overlayButton = document.getElementById("overlay-show-hide");
+    overlayButton.addEventListener("click", handleOverlay);
+    let showOverlay = true;
+    function handleOverlay() {
+        showOverlay = !showOverlay;
+        overlay.style.display = showOverlay ? "block" : "none";
     }
 
     draw();

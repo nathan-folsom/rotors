@@ -7,7 +7,13 @@
         html {
             background: darkgray;
         }
-        #art {
+        body {
+            position: relative;
+        }
+        #overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
         }
         .controls {
             display: flex;
@@ -22,10 +28,12 @@
 </head>
 <body>
 <canvas id="art"></canvas>
+<canvas id="overlay"></canvas>
 <div class="controls master">
     <div class="controls">
         <button id="pause-play">Pause</button>
         <button id="capture">[ o ']</button>
+        <button id="overlay-show-hide">&lt;o&gt;</button>
     </div>
     <div class="controls">
         <div id="frame-counter"></div>
