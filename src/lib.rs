@@ -28,38 +28,118 @@ pub fn main_js() -> Result<(), JsValue> {
 
 #[wasm_bindgen]
 pub struct FieldRenderer {
-    rotors: (Rotor, Rotor),
+    rotor_renderers: Vec<RotorRenderer>,
     frame_count: i32,
-    prev_point: Option<(f64, f64)>,
-    points: VecDeque<(f64, f64)>,
 }
 
 #[wasm_bindgen]
 impl FieldRenderer {
     #[wasm_bindgen(constructor)]
-    pub fn new() -> Self {
+    pub fn ctr() -> Self {
         Self {
-            rotors: init_rotors(),
+            rotor_renderers: vec![
+                RotorRenderer::new(
+                    Rotor {
+                        r: 160.0,
+                        theta: 0.0,
+                        v: 0.0001004,
+                        l: 1080.0,
+                        c_r: 480.0,
+                        c_theta: -SPIN_OFFSET,
+                        c_v: 0.00004,
+                        origin_offset: (0.0, 0.0),
+                    },
+                    Rotor {
+                        r: 160.0,
+                        theta: PI / 4.0,
+                        v: 0.0001,
+                        l: 1200.0,
+                        c_r: 480.0,
+                        c_theta: PI / 3.1 - SPIN_OFFSET,
+                        c_v: 0.00004,
+                        origin_offset: (0.0, 0.0),
+                    },
+                    String::from("#ff00004f"),
+                ),
+                RotorRenderer::new(
+                    Rotor {
+                        r: 160.0,
+                        theta: 0.0,
+                        v: 0.0001004,
+                        l: 1080.0,
+                        c_r: 480.0,
+                        c_theta: 0.0,
+                        c_v: 0.00006,
+                        origin_offset: (0.0, 0.0),
+                    },
+                    Rotor {
+                        r: 160.0,
+                        theta: PI / 4.0,
+                        v: 0.0001,
+                        l: 1200.0,
+                        c_r: 480.0,
+                        c_theta: PI / 3.1,
+                        c_v: 0.00006,
+                        origin_offset: (0.0, 0.0),
+                    },
+                    String::from("#ffffff"),
+                ),
+            ],
             frame_count: 0,
-            prev_point: None,
-            points: VecDeque::new(),
         }
     }
 
     #[wasm_bindgen]
     pub fn init(&mut self, ctx: &CanvasRenderingContext2d) {
-        self.render_background(ctx);
-        self.compute_points();
+        self.render_background(ctx, true);
+        self.rotor_renderers.iter_mut().for_each(|r| {
+            r.compute_points();
+        });
     }
 
     #[wasm_bindgen]
     pub fn render_frame(&mut self, ctx: &CanvasRenderingContext2d) -> i32 {
         self.frame_count += 1;
-        self.render_line(ctx);
+        self.render_background(ctx, false);
+        self.rotor_renderers.iter_mut().for_each(|r| {
+            r.render_line(ctx);
+        });
         self.frame_count
     }
 
+    fn render_background(&self, ctx: &CanvasRenderingContext2d, opaque: bool) {
+        if opaque {
+            ctx.set_fill_style(&JsValue::from_str("#03000f"));
+        } else {
+            ctx.set_fill_style(&JsValue::from_str("#03000f01"));
+        }
+        ctx.fill_rect(0.0, 0.0, WINDOW_WIDTH, WINDOW_HEIGHT);
+        ctx.set_stroke_style(&JsValue::from("#ffffff"));
+    }
+
     #[wasm_bindgen]
+    pub fn render_overlay(&mut self, ctx: &CanvasRenderingContext2d) {
+        self.rotor_renderers.iter_mut().for_each(|r| {
+            r.render_overlay(ctx);
+        });
+    }
+}
+
+struct RotorRenderer {
+    rotors: (Rotor, Rotor),
+    points: VecDeque<(f64, f64)>,
+    color: String,
+}
+
+impl RotorRenderer {
+    pub fn new(a: Rotor, b: Rotor, color: String) -> Self {
+        Self {
+            rotors: (a, b),
+            points: VecDeque::new(),
+            color,
+        }
+    }
+
     pub fn render_overlay(&self, ctx: &CanvasRenderingContext2d) {
         ctx.clear_rect(0.0, 0.0, WINDOW_WIDTH, WINDOW_HEIGHT);
 
@@ -107,12 +187,6 @@ impl FieldRenderer {
         ctx.stroke();
     }
 
-    fn render_background(&self, ctx: &CanvasRenderingContext2d) {
-        ctx.set_fill_style(&JsValue::from_str("#03000f"));
-        ctx.fill_rect(0.0, 0.0, WINDOW_WIDTH, WINDOW_HEIGHT);
-        ctx.set_stroke_style(&JsValue::from("#ffffff"));
-    }
-
     fn compute_points(&mut self) {
         for _ in 0..ITERATIONS_PER_FRAME {
             let intersections = get_intersection(&self.rotors.0, &self.rotors.1);
@@ -124,7 +198,7 @@ impl FieldRenderer {
     }
 
     fn render_line(&mut self, ctx: &CanvasRenderingContext2d) {
-        ctx.set_stroke_style(&JsValue::from_str("#ffffff3f"));
+        ctx.set_stroke_style(&JsValue::from(self.color.clone()));
         let (x, y) = self.points.pop_front().unwrap();
         ctx.begin_path();
         ctx.move_to(x, y);

@@ -3,11 +3,13 @@ use std::f64::consts::PI;
 
 pub struct Rotor {
     pub r: f64,
-    theta: f64,
-    v: f64,
-    l: f64,
-    c_r: f64,
-    c_theta: f64,
+    pub theta: f64,
+    pub v: f64,
+    pub l: f64,
+    pub c_r: f64,
+    pub c_theta: f64,
+    pub c_v: f64,
+    pub origin_offset: (f64, f64),
 }
 
 impl Rotor {
@@ -17,7 +19,12 @@ impl Rotor {
     }
 
     pub fn get_center(&self) -> (f64, f64) {
-        Self::get_rotational_point(self.c_theta, self.c_r, ORIGIN.0, ORIGIN.1)
+        Self::get_rotational_point(
+            self.c_theta,
+            self.c_r,
+            ORIGIN.0 + self.origin_offset.0,
+            ORIGIN.1 + self.origin_offset.1,
+        )
     }
 
     fn get_rotational_point(theta: f64, r: f64, cx: f64, cy: f64) -> (f64, f64) {
@@ -39,30 +46,8 @@ impl Rotor {
         self.theta += self.v;
 
         // Translate rotor around center of canvas
-        self.c_theta += SPIN_V;
+        self.c_theta += self.c_v;
     }
-}
-
-pub fn init_rotors() -> (Rotor, Rotor) {
-    let a = Rotor {
-        r: 160.0,
-        theta: 0.0,
-        v: 0.0001004,
-        l: 1080.0,
-        c_r: 480.0,
-        c_theta: 0.0,
-    };
-
-    let b = Rotor {
-        r: 160.0,
-        theta: PI / 4.0,
-        v: 0.0001,
-        l: 1200.0,
-        c_r: 480.0,
-        c_theta: PI / 3.1,
-    };
-
-    (a, b)
 }
 
 pub fn get_intersection(a: &Rotor, b: &Rotor) -> ((f64, f64), (f64, f64)) {
