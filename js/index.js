@@ -1,12 +1,19 @@
+const canvasSize = 3000;
+const canvasStyleSize = "700px";
+
 import("../pkg/index.js").then(mod => {
     const canvas = document.getElementById("art");
-    canvas.width = 700;
-    canvas.height = 700;
+    canvas.width = canvasSize;
+    canvas.height = canvasSize;
+    canvas.style.width = canvasStyleSize;
+    canvas.style.height = canvasStyleSize;
     const ctx = canvas.getContext("2d");
 
     const overlay = document.getElementById("overlay");
-    overlay.width = 700;
-    overlay.height = 700;
+    overlay.width = canvasSize;
+    overlay.height = canvasSize;
+    overlay.style.width = canvasStyleSize;
+    overlay.style.height = canvasStyleSize;
     const overlayCtx = overlay.getContext("2d");
 
     const renderer = new mod.FieldRenderer();

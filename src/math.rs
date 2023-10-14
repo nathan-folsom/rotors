@@ -45,20 +45,20 @@ impl Rotor {
 
 pub fn init_rotors() -> (Rotor, Rotor) {
     let a = Rotor {
-        r: 40.0,
+        r: 160.0,
         theta: 0.0,
         v: 0.0001004,
-        l: 270.0,
-        c_r: 120.0,
+        l: 1080.0,
+        c_r: 480.0,
         c_theta: 0.0,
     };
 
     let b = Rotor {
-        r: 40.0,
+        r: 160.0,
         theta: PI / 4.0,
         v: 0.0001,
-        l: 300.0,
-        c_r: 120.0,
+        l: 1200.0,
+        c_r: 480.0,
         c_theta: PI / 3.1,
     };
 
