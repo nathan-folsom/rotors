@@ -65,9 +65,9 @@ impl FieldRenderer {
                     Rotor {
                         r: 160.0,
                         theta: 0.0,
-                        v: 0.0001004,
+                        v: 0.00001004,
                         l: 1080.0,
-                        c_r: 480.0,
+                        c_r: 280.0,
                         c_theta: 0.0,
                         c_v: 0.00006,
                         origin_offset: (0.0, 0.0),
@@ -75,9 +75,9 @@ impl FieldRenderer {
                     Rotor {
                         r: 160.0,
                         theta: PI / 4.0,
-                        v: 0.0001,
+                        v: 0.00001,
                         l: 1200.0,
-                        c_r: 480.0,
+                        c_r: 200.0,
                         c_theta: PI / 3.1,
                         c_v: 0.00006,
                         origin_offset: (0.0, 0.0),
@@ -144,6 +144,7 @@ impl RotorRenderer {
         ctx.clear_rect(0.0, 0.0, WINDOW_WIDTH, WINDOW_HEIGHT);
 
         ctx.set_stroke_style(&JsValue::from_str("#ff000055"));
+        ctx.set_line_width(5.0);
         ctx.set_fill_style(&JsValue::from_str("#000000"));
         let render_rim = |rotor: &Rotor| {
             ctx.begin_path();

@@ -1,4 +1,4 @@
-const canvasSize = 3000;
+const canvasSize = 3100;
 const canvasStyleSize = "700px";
 
 import("../pkg/index.js").then(mod => {
