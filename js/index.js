@@ -1,17 +1,10 @@
 const CANVAS_SIZE = 3100;
 
-import("../pkg/index.js").then(mod => {
-  const canvas = document.getElementById("art");
-  canvas.width = CANVAS_SIZE;
-  canvas.height = CANVAS_SIZE;
-  const ctx = canvas.getContext("2d");
+import("../pkg/index.js").then(({ FieldRenderer }) => {
+  const ctx = getCanvasContext("art");
+  const overlayCtx = getCanvasContext("overlay");
 
-  const overlay = document.getElementById("overlay");
-  overlay.width = CANVAS_SIZE;
-  overlay.height = CANVAS_SIZE;
-  const overlayCtx = overlay.getContext("2d");
-
-  const renderer = new mod.FieldRenderer();
+  const renderer = new FieldRenderer();
   renderer.init(ctx);
 
   const frameCounter = document.getElementById("frame-counter");
@@ -23,15 +16,12 @@ import("../pkg/index.js").then(mod => {
   let draw = () => {
     let frameCount = renderer.render_frame(ctx);
     frameCounter.innerText = `Frames: ${frameCount}`;
-
     renderer.render_overlay(overlayCtx);
-
     if (frameCount % 10 === 0) {
       const fps = 10 / ((performance.now() - lastTimestamp) / 1000);
       frameRate.innerText = `fps: ${fps.toFixed(2)}`
       lastTimestamp = performance.now();
     }
-
     if (!playing) return;
     requestAnimationFrame(draw)
   }
@@ -62,7 +52,6 @@ import("../pkg/index.js").then(mod => {
   const overlayButton = document.getElementById("overlay-show-hide");
   overlayButton.addEventListener("click", handleOverlay);
   let showOverlay = true;
-  // overlay.style.display = "none";
   function handleOverlay() {
     showOverlay = !showOverlay;
     overlay.style.display = showOverlay ? "block" : "none";
@@ -70,3 +59,10 @@ import("../pkg/index.js").then(mod => {
 
   draw();
 }).catch(console.error);
+
+function getCanvasContext(canvasId) {
+  const canvas = document.getElementById(canvasId);
+  canvas.width = CANVAS_SIZE;
+  canvas.height = CANVAS_SIZE;
+  return canvas.getContext("2d");
+}
