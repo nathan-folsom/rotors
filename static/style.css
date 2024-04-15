@@ -3,7 +3,6 @@ html {
 }
 
 body {
-  position: relative;
   margin: 0;
 }
 
@@ -11,6 +10,10 @@ body {
   position: absolute;
   top: 0;
   left: 0;
+}
+
+.artboard {
+  width: 100%;
 }
 
 .controls {
@@ -21,5 +24,28 @@ body {
 
 .controls.master {
   justify-content: space-between;
-  width: 700px;
+  margin: 5px 10px;
 }
+
+.upper {
+  display: flex;
+  width: 100%;
+}
+
+.left {
+  position: relative;
+  background-color: #eeeeee;
+  flex: 1 1 100%;
+  max-width: 80vh;
+}
+
+.right {
+  padding: 0 10px;
+  flex: 1 0 300px;
+}
+
+.tabs {
+  display: flex;
+}
+
+.config {}
